@@ -8,9 +8,15 @@ const mutations = {
 	}
 };
 
-const actions = {};
+const actions = {
+	setToken({ dispatch }, token) {
+		dispatch('SET_TOKEN', token);
+	}
+};
 
-const getters = {};
+const getters = {
+	token: state => state.token
+};
 
 export default {
 	namespace: true,
