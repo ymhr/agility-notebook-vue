@@ -9,8 +9,9 @@ const mutations = {
 };
 
 const actions = {
-	setToken({ dispatch }, token) {
-		dispatch('SET_TOKEN', token);
+	setToken({ commit }, token) {
+		localStorage.setItem('token', token);
+		commit('SET_TOKEN', token);
 	}
 };
 
@@ -19,7 +20,7 @@ const getters = {
 };
 
 export default {
-	namespace: true,
+	namespaced: true,
 	state,
 	mutations,
 	actions,
