@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store/index';
-import Home from '@/views/Home.vue';
+import Shows from '@/views/Shows.vue';
 import Login from '@/views/Login.vue';
+import Show from '@/views/Show.vue'
 
 Vue.use(Router);
 
@@ -17,7 +18,12 @@ const router = new Router({
 		{
 			path: '/',
 			name: 'home',
-			component: Home
+			component: Shows
+		},
+		{
+			path: '/show/:showId',
+			name: 'show',
+			component: Show
 		}
 	]
 });

@@ -5,8 +5,6 @@ const instance = axios.create({
 	baseURL: 'https://api.agilitynotebook.com/'
 });
 
-// instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-
 instance.interceptors.request.use((config) => {
 	const token = store.getters['auth/token'];
 	config.headers.Authorization = `Bearer ${token}`;

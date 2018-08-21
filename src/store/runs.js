@@ -27,8 +27,8 @@ const actions = {
 
 const getters = {
 	all: state => state.items,
-	byId: (state, getters) => id => getters.all.filter(run => run.id === id),
-	byShow: (state, getters) => id => getters.all.filter(run => run.showId === id)
+	byId: (state, getters) => id => getters.all.find(run => run.id === id),
+	byShow: (state, getters) => id => getters.all.filter(run => parseInt(run.showId, 10) === parseInt(id, 10))
 };
 
 export default {

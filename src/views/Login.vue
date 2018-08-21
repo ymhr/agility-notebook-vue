@@ -1,7 +1,7 @@
 <template>
     <div class="login-form">
         <form>
-			<vs-button vs-color="primary" @click.prevent="login">Login with Facebook</vs-button>
+			<v-btn color="info" @click="login">Log in with Facebook</v-btn>
         </form>
     </div>
 </template>

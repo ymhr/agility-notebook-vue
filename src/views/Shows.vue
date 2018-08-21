@@ -1,7 +1,9 @@
 <template>
-	<div class="shows">
-		<ShowItem v-for="show in shows" :key="show.id" :show="show" />
-	</div>
+	<v-layout row>
+		<v-flex xs-12>
+			<ShowItem v-for="show in shows" :key="show.id" :show="show" />
+		</v-flex>
+	</v-layout>
 </template>
 
 <script>
@@ -22,5 +24,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+	
 </style>
