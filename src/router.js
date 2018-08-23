@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import store from '@/store/index';
 import Shows from '@/views/Shows.vue';
 import Login from '@/views/Login.vue';
-import Show from '@/views/Show.vue'
+import Show from '@/views/Show.vue';
 
 Vue.use(Router);
 

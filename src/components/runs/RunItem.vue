@@ -6,13 +6,13 @@
 
 <script>
 export default {
-    props: {
-        run: {
-            type: Object,
-            required: true
-        }
-    }
-}
+	props: {
+		run: {
+			type: Object,
+			required: true
+		}
+	}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -22,7 +22,7 @@
 		</v-navigation-drawer>
 
 		<v-toolbar
-		 	:clipped-left="$vuetify.breakpoint.mdAndUp"
+			:clipped-left="$vuetify.breakpoint.mdAndUp"
 			dark
 			fixed
 			app

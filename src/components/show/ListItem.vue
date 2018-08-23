@@ -5,7 +5,7 @@
 				<v-flex xs11>
 					<h2>{{show.name}}</h2>
 				</v-flex>
-				
+
 				<v-flex xs1 justify-center align-center>
 					<div class="expand" @click.stop.prevent="expand">
 						<v-icon right>{{icon}}</v-icon>
@@ -32,7 +32,7 @@ export default {
 			required: true
 		}
 	},
-	data(){
+	data() {
 		return {
 			expanded: false
 		};

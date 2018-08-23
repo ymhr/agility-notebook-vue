@@ -1,9 +1,10 @@
 import Vue from 'vue';
+import { parse, format, compareAsc } from 'date-fns';
 import { get } from '@/api';
 
 const state = {
 	items: [],
-	loading: false
+	loading: true
 };
 
 const mutations = {
@@ -51,7 +52,6 @@ const actions = {
 		dispatch('setLoading', false);
 	},
 	async loadShow({ dispatch, getters }, id) {
-
 		const current = getters.byId(id);
 
 		if (current) return;
@@ -69,10 +69,34 @@ const actions = {
 
 const getters = {
 	all: state => state.items,
-	byId: (state, getters) => id => getters.all.find((show) => {
-		return parseInt(show.id, 10) === parseInt(id, 10);
-	}),
-	loading: state => state.loading
+	byId: (state, getters) => id => getters.all.find(show => parseInt(show.id, 10) === parseInt(id, 10)),
+	loading: state => state.loading,
+	groupShowsByYear: (state, getters) => {
+		const shows = getters.all;
+		const years = shows.reduce((years, show) => {
+			const year = format(parse(show.startDate), 'YYYY');
+
+			if (!years[year]) years[year] = [];
+
+			years[year].push(show);
+
+			years[year].sort((a, b) => {
+				const aDate = parse(a.startDate);
+				const bDate = parse(b.startDate);
+				return compareAsc(aDate, bDate);
+			});
+
+			return years;
+		}, {});
+
+		return years;
+	},
+	getShowsForYear: (state, getters) => (year) => {
+		return getters.groupShowsByYear[year];
+	},
+	getYears: (state, getters) => {
+		return Object.keys(getters.groupShowsByYear);
+	}
 };
 
 export default {
