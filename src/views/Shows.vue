@@ -1,16 +1,7 @@
 <template>
 	<v-layout row>
 		<v-flex xs12>
-			<div
-				class="year"
-				v-for="year in years"
-				:key="year"
-				:class="{ active: activeYear === year }"
-				@click="changeYear(year)"
-			>
-				{{year}}
-			</div>
-			<!-- <YearPicker v-if="years.length" :years="years" :active="yearSelected" /> -->
+			<YearPicker v-if="years.length" :years="years" v-model="activeYear" />
 			<ShowItem v-for="show in shows" :key="show.id" :show="show" />
 		</v-flex>
 	</v-layout>

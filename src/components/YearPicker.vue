@@ -2,12 +2,12 @@
 	<div class="year-picker">
 		<v-menu bottom left>
 			<div class="active" slot="activator">
-				{{active}}
+				{{value}}
 			</div>
 
 			<v-list>
 				<v-list-tile v-for="year in years" :key="year">
-					<v-list-tile-title>{{year}}</v-list-tile-title>
+					<v-list-tile-title @click="changeYear(year)">{{year}}</v-list-tile-title>
 				</v-list-tile>
 			</v-list>
 		</v-menu>
@@ -21,7 +21,7 @@ export default {
 			type: Array,
 			required: true
 		},
-		active: {
+		value: {
 			type: String
 		}
 	},
@@ -29,10 +29,20 @@ export default {
 		return {
 			menuOpen: false
 		};
+	},
+	methods: {
+		changeYear(year) {
+			this.$emit('input', year);
+		}
 	}
 };
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+	.active {
+		background-color: #eee;
+		border: 3px solid black;
+		padding: 10px;
+		margin-bottom: 20px;
+	}
 </style>
