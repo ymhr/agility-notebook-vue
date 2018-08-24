@@ -165,8 +165,8 @@
 			label="Notes"
 			auto-grow
 		/>
-		
-		<v-btn block color="success" dark>Save</v-btn>
+
+		<v-btn block color="success" dark @click="submit">Save</v-btn>
 	</v-form>
 </template>
 
@@ -201,7 +201,7 @@ export default {
 	},
 	methods: {
 		submit() {
-			console.log('submit');
+			this.$emit('saved', this.model);
 		}
 	}
 };

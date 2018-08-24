@@ -3,7 +3,7 @@
 		<v-layout row>
 			<v-flex xs12>
 				<h1>New</h1>
-				<Form />
+				<Form @saved="createNewShow"/>
 			</v-flex>
 		</v-layout>
 	</v-container>
@@ -13,7 +13,12 @@
 import Form from '@/components/show/Form.vue';
 
 export default {
-	components: { Form }
+	components: { Form },
+	methods: {
+		createNewShow(show) {
+			this.$store.dispatch('shows/create')(show);
+		}
+	}
 };
 </script>
 
