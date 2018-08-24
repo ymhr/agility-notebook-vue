@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { parse, format, compareAsc } from 'date-fns';
+import { parse, format, compareAsc, isAfter } from 'date-fns';
 import { get } from '@/api';
 
 const state = {
@@ -73,7 +73,7 @@ const getters = {
 	loading: state => state.loading,
 	groupShowsByYear: (state, getters) => {
 		const shows = getters.all;
-		const years = shows.reduce((years, show) => {
+		let years = shows.reduce((years, show) => {
 			const year = format(parse(show.startDate), 'YYYY');
 
 			if (!years[year]) years[year] = [];
@@ -89,6 +89,23 @@ const getters = {
 			return years;
 		}, {});
 
+		years = Object.entries(years).reduce((years, [year, shows]) => {
+			const months = shows.reduce((months, show) => {
+				const showStartDate = parse(show.startDate);
+				const month = format(showStartDate, 'MMMM');
+
+				if (!months[month]) months[month] = [];
+
+				months[month].push(show);
+
+				return months;
+			}, {});
+
+			years[year] = months;
+
+			return years;
+		}, {});
+
 		return years;
 	},
 	getShowsForYear: (state, getters) => (year) => {
@@ -96,6 +113,12 @@ const getters = {
 	},
 	getYears: (state, getters) => {
 		return Object.keys(getters.groupShowsByYear);
+	},
+	isShowInPast: (state, getters) => (showId) => {
+		const show = getters.byId(showId);
+		const today = new Date();
+		const endDate = parse(show.endDate);
+		return isAfter(today, endDate);
 	}
 };
 

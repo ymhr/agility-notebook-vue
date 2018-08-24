@@ -4,6 +4,8 @@ import store from '@/store/index';
 import Shows from '@/views/Shows.vue';
 import Login from '@/views/Login.vue';
 import Show from '@/views/Show.vue';
+import EditShow from '@/views/EditShow.vue';
+import NewShow from '@/views/NewShow.vue';
 
 Vue.use(Router);
 
@@ -19,6 +21,16 @@ const router = new Router({
 			path: '/',
 			name: 'home',
 			component: Shows
+		},
+		{
+			path: '/show/new',
+			name: 'NewShow',
+			component: NewShow
+		},
+		{
+			path: '/show/:showId/edit',
+			name: 'editShow',
+			component: EditShow
 		},
 		{
 			path: '/show/:showId',

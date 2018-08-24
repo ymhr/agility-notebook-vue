@@ -6,7 +6,7 @@
 			</div>
 
 			<v-list>
-				<v-list-tile v-for="year in years" :key="year">
+				<v-list-tile v-for="year in sortedYears" :key="year">
 					<v-list-tile-title @click="changeYear(year)">{{year}}</v-list-tile-title>
 				</v-list-tile>
 			</v-list>
@@ -29,6 +29,11 @@ export default {
 		return {
 			menuOpen: false
 		};
+	},
+	computed: {
+		sortedYears() {
+			return [...this.years].sort().reverse();
+		}
 	},
 	methods: {
 		changeYear(year) {

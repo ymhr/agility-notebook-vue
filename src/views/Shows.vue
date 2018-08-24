@@ -1,19 +1,32 @@
 <template>
-	<v-layout row>
-		<v-flex xs12>
-			<YearPicker v-if="years.length" :years="years" v-model="activeYear" />
-			<ShowItem v-for="show in shows" :key="show.id" :show="show" />
-		</v-flex>
-	</v-layout>
+	<v-container fill-height fluid v-if="!loading">
+		<v-layout row>
+			<v-flex xs12>
+				<YearPicker v-if="years.length" :years="years" v-model="activeYear" />
+				<ShowList :months="shows"/>
+			</v-flex>
+			<v-btn
+				color="blue"
+				dark
+				large
+				fixed
+				bottom
+				right
+				fab
+				>
+				<v-icon>add</v-icon>
+			</v-btn>
+		</v-layout>
+	</v-container>
 </template>
 
 <script>
-import ShowItem from '@/components/show/ListItem.vue';
+import ShowList from '@/components/show/list/ShowList.vue';
 import YearPicker from '@/components/YearPicker.vue';
 
 export default {
 	name: 'home',
-	components: { ShowItem, YearPicker },
+	components: { ShowList, YearPicker },
 	data() {
 		return {
 			activeYear: null
@@ -27,7 +40,7 @@ export default {
 			return this.$store.getters['shows/getYears'];
 		},
 		loading() {
-			return this.$store.getters['shows/loading'];
+			return this.$store.getters['shows/loading'] || !this.shows;
 		}
 	},
 	async mounted() {
