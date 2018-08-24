@@ -1,5 +1,6 @@
 <template>
 	<v-form @submit.prevent="submit">
+		<input type="hidden" v-model="model.id">
 		<v-text-field
 			v-model="model.name"
 			label="Name"
@@ -95,7 +96,7 @@
 			<v-flex xs6 sm2>
 				<v-checkbox
 					label="Booked?"
-					v-model="model.booked"
+					v-model="model.bookedIn"
 				/>
 			</v-flex>
 			<v-flex xs6 sm2>
@@ -172,6 +173,12 @@
 
 <script>
 export default {
+	props: {
+		show: {
+			type: Object,
+			default: () => ({})
+		}
+	},
 	data() {
 		return {
 			dates: {
@@ -179,29 +186,38 @@ export default {
 				endDate: false,
 				closingDate: false
 			},
-			model: {
-				name: '',
-				postcode: '',
-				notes: '',
-				startDate: '',
-				endDate: '',
-				closingDate: '',
-				booked: false,
-				paid: false,
-				hotelNeeded: false,
-				hotelBooked: false,
-				holidayNeeded: false,
-				holidayBooked: false,
-				campingRequired: false,
-				campingBooked: false,
-				campingConfirmed: false,
-				bookingPlatform: ''
-			}
+			model: this.generateModel()
 		};
+	},
+	watch: {
+		show() {
+			this.model = this.generateModel();
+		}
 	},
 	methods: {
 		submit() {
 			this.$emit('saved', this.model);
+		},
+		generateModel() {
+			return {
+				id: this.show.id || undefined,
+				name: this.show.name || '',
+				postcode: this.show.postcode || '',
+				notes: this.show.notes || '',
+				startDate: this.show.startDate || '',
+				endDate: this.show.endDate || '',
+				closingDate: this.show.closingDate || '',
+				bookedIn: this.show.bookedIn || false,
+				paid: this.show.paid || false,
+				hotelNeeded: this.show.hotelNeeded || false,
+				hotelBooked: this.show.hotelBooked || false,
+				holidayNeeded: this.show.holidayNeeded || false,
+				holidayBooked: this.show.holidayBooked || false,
+				campingRequired: this.show.campingRequired || false,
+				campingBooked: this.show.campingBooked || false,
+				campingConfirmed: this.show.campingConfirmed || false,
+				bookingPlatform: this.show.bookingPlatform || ''
+			};
 		}
 	}
 };

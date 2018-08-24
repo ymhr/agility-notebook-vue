@@ -16,7 +16,7 @@ export default {
 	components: { Form },
 	methods: {
 		createNewShow(show) {
-			this.$store.dispatch('shows/create')(show);
+			this.$store.dispatch('shows/create', show);
 		}
 	}
 };

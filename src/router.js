@@ -24,7 +24,7 @@ const router = new Router({
 		},
 		{
 			path: '/show/new',
-			name: 'NewShow',
+			name: 'newShow',
 			component: NewShow
 		},
 		{

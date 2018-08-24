@@ -20,7 +20,7 @@
 		<div class="details" v-if="expanded">
 			<v-layout row>
 				<v-flex xs12>
-					<ItemDetails :item="show" :properties="detailsToShow" />
+					<Details :showId="this.show.id"/>
 				</v-flex>
 			</v-layout>
 		</div>
@@ -29,10 +29,10 @@
 
 <script>
 import { parse, format } from 'date-fns';
-import ItemDetails from '@/components/ItemDetails.vue';
+import Details from '@/components/show/Details.vue';
 
 export default {
-	components: { ItemDetails },
+	components: { Details },
 	props: {
 		show: {
 			type: Object,
@@ -53,44 +53,6 @@ export default {
 		},
 		endDate() {
 			return format(parse(this.show.endDate), 'Do MMM YYYY');
-		},
-		detailsToShow() {
-			return {
-				runs: {
-					count: true,
-					label: 'Runs'
-				},
-				bookingPlatform: {
-					label: 'Booking platform'
-				},
-				booked: {
-					label: 'Booked'
-				},
-				paid: {
-					label: 'Paid'
-				},
-				hotelNeeded: {
-					label: 'Hotel needed'
-				},
-				hotelBooked: {
-					label: 'Hotel booked'
-				},
-				holidayNeeded: {
-					label: 'Holiday needed'
-				},
-				holidayBooked: {
-					label: 'Holiday booked'
-				},
-				campingNeeded: {
-					label: 'Camping needed'
-				},
-				campingBooked: {
-					label: 'Camping booked'
-				},
-				campingConfirmed: {
-					label: 'Camping confirmed'
-				}
-			};
 		},
 		isInPast() {
 			return this.$store.getters['shows/isShowInPast'](this.show.id);

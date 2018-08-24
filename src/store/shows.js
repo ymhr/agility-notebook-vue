@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { parse, format, compareAsc, isAfter } from 'date-fns';
-import { get } from '@/api';
+import { get, post } from '@/api';
 
 const state = {
 	items: [],
@@ -17,7 +17,7 @@ const mutations = {
 	SET_SHOW(state, show) {
 		const current = state.items.findIndex(item => item.id === show.id);
 
-		if (current < -1) {
+		if (current > -1) {
 			Vue.set(state.items, current, show);
 		} else {
 			state.items.push(show);
@@ -51,10 +51,10 @@ const actions = {
 		dispatch('setShows', shows);
 		dispatch('setLoading', false);
 	},
-	async loadShow({ dispatch, getters }, id) {
+	async loadShow({ dispatch, getters }, { id, force = false }) {
 		const current = getters.byId(id);
 
-		if (current) return;
+		if (current && !force) return;
 
 		dispatch('setLoading', true);
 		const { data: show } = await get(`shows/${id}`);
@@ -64,6 +64,24 @@ const actions = {
 
 		dispatch('setShow', show);
 		dispatch('setLoading', false);
+	},
+	async update({ dispatch }, show) {
+		if (!show.id) throw new Error('ID required');
+
+		dispatch('setLoading', true);
+
+		try {
+			await post(`shows/${show.id}`, show);
+			// console.log(show);
+			// dispatch('setShow', show);
+			await dispatch('loadShow', { id: show.id, force: true });
+			return true;
+		} catch (e) {
+			console.warn(e);
+			return false;
+		} finally {
+			dispatch('setLoading', false);
+		}
 	}
 };
 

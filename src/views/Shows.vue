@@ -6,6 +6,7 @@
 				<ShowList :months="shows"/>
 			</v-flex>
 			<v-btn
+				:to="{ name: 'newShow' }"
 				color="blue"
 				dark
 				large
