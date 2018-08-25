@@ -32,6 +32,7 @@ export default {
 	},
 	computed: {
 		sortedYears() {
+			// eslint-disable-next-line
 			return [...this.years].sort().reverse();
 		}
 	},

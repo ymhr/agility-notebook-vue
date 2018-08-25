@@ -75,6 +75,7 @@ const actions = {
 			await dispatch('loadShow', { id: show.id, force: true });
 			return true;
 		} catch (e) {
+			// eslint-disable-next-line
 			console.warn(e);
 			return false;
 		} finally {
@@ -91,6 +92,7 @@ const actions = {
 			dispatch('setShow', newShow);
 			return newShow;
 		} catch (e) {
+			// eslint-disable-next-line
 			console.warn(e);
 			return false;
 		} finally {
