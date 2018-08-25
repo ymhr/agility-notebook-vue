@@ -72,10 +72,24 @@ const actions = {
 
 		try {
 			await post(`shows/${show.id}`, show);
-			// console.log(show);
-			// dispatch('setShow', show);
 			await dispatch('loadShow', { id: show.id, force: true });
 			return true;
+		} catch (e) {
+			console.warn(e);
+			return false;
+		} finally {
+			dispatch('setLoading', false);
+		}
+	},
+	async create({ dispatch }, show) {
+		if (show.id) throw new Error('This should be a new show, no ID should be present');
+
+		try {
+			dispatch('setLoading', true);
+			const { data } = await post('/shows', show);
+			const { data: newShow } = data;
+			dispatch('setShow', newShow);
+			return newShow;
 		} catch (e) {
 			console.warn(e);
 			return false;

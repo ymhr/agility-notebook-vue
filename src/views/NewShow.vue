@@ -15,8 +15,9 @@ import Form from '@/components/show/Form.vue';
 export default {
 	components: { Form },
 	methods: {
-		createNewShow(show) {
-			this.$store.dispatch('shows/create', show);
+		async createNewShow(show) {
+			const newShow = await this.$store.dispatch('shows/create', show);
+			this.$router.push({ name: 'show', params: { showId: newShow.id } });
 		}
 	}
 };

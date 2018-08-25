@@ -42,7 +42,10 @@ export default {
 			const meta = this.getPropertyMeta(name);
 
 			if (meta.count) {
-				return this.item[name].length;
+				if (this.item[name]) {
+					return this.item[name].length;
+				}
+				return 0;
 			}
 
 			return this.item[name];
