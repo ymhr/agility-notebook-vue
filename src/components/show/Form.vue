@@ -84,8 +84,7 @@
 					/>
 					<v-date-picker
 						v-model="model.closingDate"
-						:min="model.startDate"
-						:max="model.endDate"
+						:max="model.startDate"
 						scrollable
 					/>
 				</v-menu>

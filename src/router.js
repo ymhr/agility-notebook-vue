@@ -6,6 +6,8 @@ import Login from '@/views/Login.vue';
 import Show from '@/views/Show.vue';
 import EditShow from '@/views/EditShow.vue';
 import NewShow from '@/views/NewShow.vue';
+import NewRun from '@/views/NewRun.vue';
+import Dogs from '@/views/Dogs.vue';
 
 Vue.use(Router);
 
@@ -36,6 +38,16 @@ const router = new Router({
 			path: '/show/:showId',
 			name: 'show',
 			component: Show
+		},
+		{
+			path: '/show/:showId/run/new',
+			name: 'newRun',
+			component: NewRun
+		},
+		{
+			path: '/dogs',
+			name: 'dogs',
+			component: Dogs
 		}
 	]
 });

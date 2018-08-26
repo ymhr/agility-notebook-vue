@@ -8,13 +8,15 @@
 			app
 		>
 			<v-list>
-				<v-list-tile>
-					<v-list-tile-content>Shows</v-list-tile-content>
+				<v-list-tile :to="{ name: 'home' }">
+					<v-list-tile-content>
+						<v-list-tile-title>Shows</v-list-tile-title>
+					</v-list-tile-content>
 				</v-list-tile>
-				<v-list-tile>
+				<v-list-tile :to="{ name: 'dogs' }">
 					<v-list-tile-content>Dogs</v-list-tile-content>
 				</v-list-tile>
-				<v-list-tile>
+				<v-list-tile :to="{ name: 'settings' }">
 					<v-list-tile-content>Settings</v-list-tile-content>
 				</v-list-tile>
 			</v-list>
@@ -32,11 +34,7 @@
 		</v-toolbar>
 
 		<v-content>
-			<v-container fluid fill-height>
-				<v-layout>
-					<router-view/>
-				</v-layout>
-			</v-container>
+			<router-view/>
 		</v-content>
 
 	</div>

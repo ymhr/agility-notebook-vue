@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { parse, format, compareAsc } from 'date-fns';
 
 const state = {
 	items: []
@@ -28,7 +29,48 @@ const actions = {
 const getters = {
 	all: state => state.items,
 	byId: (state, getters) => id => getters.all.find(run => run.id === id),
-	byShow: (state, getters) => id => getters.all.filter(run => parseInt(run.showId, 10) === parseInt(id, 10))
+	byShow: (state, getters) => id => getters.all.filter(run => parseInt(run.showId, 10) === parseInt(id, 10)),
+	byShowByDate: (state, getters) => (id) => {
+		const runs = getters.byShow(id);
+		const days = runs.reduce((runs, run) => {
+			const date = format(parse(run.date), 'Do MMMM');
+
+			if (!runs[date]) runs[date] = [];
+
+			runs[date].push(run);
+
+			return runs;
+		}, {});
+
+		const orderedDays = Object.keys(days).sort((a, b) => {
+			a = parse(a);
+			b = parse(b);
+			return compareAsc(a, b);
+		})
+			.reverse() // sorting asc/desc no difference, reverse???
+			.reduce((allDays, day) => {
+				allDays[day] = days[day];
+				return allDays;
+			}, {});
+
+		return orderedDays;
+	},
+	byShowByDateByDog: (state, getters) => (id) => {
+		const days = getters.byShowByDate(id);
+		return Object.entries(days).reduce((days, [date, runs]) => {
+			const runsByDog = runs.reduce((dogs, run) => {
+				if (!dogs[run.dogId]) dogs[run.dogId] = [];
+
+				dogs[run.dogId].push(run);
+
+				return dogs;
+			}, {});
+
+			days[date] = runsByDog;
+
+			return days;
+		}, {});
+	}
 };
 
 export default {

@@ -13,6 +13,7 @@ export default {};
 		text-transform: uppercase;
 		display: flex;
 		align-items: center;
+		white-space: nowrap;
 
 		&:before, &:after {
 			content: '';
