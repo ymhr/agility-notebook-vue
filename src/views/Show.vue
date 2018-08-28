@@ -9,7 +9,7 @@
 					slot="activator"
 					fab
 					dark
-					color="red"
+					color="orange"
 				>
 					<v-icon>add</v-icon>
 				</v-btn>
@@ -86,7 +86,7 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 	.controls {
 		position: absolute;
 		bottom: calc(0% - 20px);

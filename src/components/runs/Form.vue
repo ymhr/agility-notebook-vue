@@ -4,7 +4,7 @@
 			<v-layout row>
 				<v-flex xs12>
 					<Separator>Booked run</Separator>
-					<div>DOG SELECTOR</div>
+					<DogSelector />
 					<div>HANDLER SELECTOR</div>
 				</v-flex>
 			</v-layout>
@@ -133,9 +133,10 @@
 
 <script>
 import Separator from '@/components/Separator.vue';
+import DogSelector from '@/components/dogs/Selector.vue';
 
 export default {
-	components: { Separator },
+	components: { Separator, DogSelector },
 	computed: {
 		classTypes() {
 			return [

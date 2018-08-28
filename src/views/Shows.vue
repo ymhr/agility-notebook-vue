@@ -7,7 +7,7 @@
 			</v-flex>
 			<v-btn
 				:to="{ name: 'newShow' }"
-				color="blue"
+				color="orange"
 				dark
 				large
 				fixed
