@@ -35,7 +35,6 @@ export default {
     },
     methods: {
         selected(e) {
-            console.log(e);
             this.$emit('input', e);
         }
     }
