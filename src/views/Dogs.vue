@@ -1,19 +1,34 @@
 <template>
-	<v-content fluid fill-height>
+	<v-container fluid fill-height>
+		<v-btn
+			fab
+			dark
+			fixed
+			bottom
+			right
+			color="orange"
+		>
+			<v-icon>add</v-icon>
+		</v-btn>
 		<v-layout row>
 			<v-flex xs12>
-				<h1>Hello dogs</h1>
+				<List />
 			</v-flex>
 		</v-layout>
-	</v-content>
+	</v-container>
 </template>
 
 <script>
-export default {
+import List from '@/components/dogs/List.vue';
 
+export default {
+	components: { List },
+	mounted() {
+		this.$store.dispatch('dogs/loadDogs');
+	}
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

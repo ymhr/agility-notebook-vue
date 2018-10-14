@@ -75,6 +75,8 @@ export default {
 		background-color: #eee;
 		margin-bottom: 10px;
 		cursor: pointer;
+		box-shadow: 0 0 0 0 rgba(0, 0, 0 , 0);
+		transition: box-shadow 0.3s;
 
 		&.past {
 			transition: opacity 0.3s;
@@ -92,6 +94,10 @@ export default {
 
 		&.open {
 			margin-bottom: 0;
+		}
+
+		&:hover {
+			box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.3);
 		}
 
 		.expand {
