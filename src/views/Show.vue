@@ -39,8 +39,8 @@
 					<v-flex xs12>
 						<ExpandPanel v-for="(dogs, day) in runDays" :key="day">
 							<Separator slot="activator">{{day}}</Separator>
-							<ExpandPanel v-for="(runs, dog) in dogs" :key="dog">
-								<Separator slot="activator">{{dog}}</Separator>
+							<ExpandPanel v-for="(runs, dogId) in dogs" :key="dogId">
+								<Separator slot="activator">{{dogName(dogId)}}</Separator>
 								<v-flex xs12 sm6 md4 v-for="run in runs" :key="run.id">
 									<Run :run="run" />
 								</v-flex>
@@ -82,6 +82,20 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('shows/loadShows', this.id);
+		this.$store.dispatch('dogs/loadDogs');
+		this.$store.dispatch('handlers/loadHandlers');
+	},
+	methods: {
+		dog(id) {
+			return this.$store.getters['dogs/byId'](id);
+		},
+		dogName(id) {
+			const dog = this.dog(id);
+
+			if (dog) return dog.name;
+
+			return '';
+		}
 	}
 };
 </script>

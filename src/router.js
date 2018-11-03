@@ -45,6 +45,11 @@ const router = new Router({
 			component: NewRun
 		},
 		{
+			path: '/show/:showId/run/:runId',
+			name: 'editRun',
+			component: NewRun
+		},
+		{
 			path: '/dogs',
 			name: 'dogs',
 			component: Dogs

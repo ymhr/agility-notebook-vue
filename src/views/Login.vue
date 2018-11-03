@@ -16,7 +16,7 @@ export default {
 	},
 	methods: {
 		login() {
-			window.location.href = 'https://api.agilitynotebook.com/auth/facebook?returnTo=http://localhost:8080';
+			window.location.href = `${process.env.API_ADDRESS}/auth/facebook?returnTo=${process.env.LOCAL_ADDRESS}`;
 		}
 	}
 };

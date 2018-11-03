@@ -1,10 +1,13 @@
 <template>
-	<v-form>
+	<div v-if="loading">
+		Loading...
+	</div>
+	<v-form v-else>
 		<v-container fluid>
 			<v-layout row>
 				<v-flex xs12>
 					<Separator>Booked run</Separator>
-					<DogSelector v-model="model.dog" />
+					<DogSelector v-model="model.dogId" />
 					<HandlerSelector v-model="model.handlerOverride" />
 				</v-flex>
 			</v-layout>
@@ -34,6 +37,8 @@
 						/>
 						<v-date-picker
 							v-model="model.date"
+							:max="show.endDate"
+							:min="show.startDate"
 							scrollable
 						/>
 					</v-menu>
@@ -144,7 +149,7 @@
 					/>
 				</v-flex>
 			</v-layout>
-			<v-btn block color="success">Save</v-btn>
+			<v-btn block color="success" @click="submit">Save</v-btn>
 		</v-container>
 	</v-form>
 </template>
@@ -156,33 +161,15 @@ import HandlerSelector from '@/components/handlers/Selector.vue';
 
 export default {
 	components: { Separator, DogSelector, HandlerSelector },
+	props: {
+		run: {
+			type: Object,
+			default: () => ({})
+		}
+	},
 	data() {
 		return {
-			model: {
-				classNumber: null,
-				classSize: null,
-				clear: false,
-				courseLength: null,
-				courseTime: null,
-				currentGrade: null,
-				date: null,
-				dogId: null,
-				eliminated: false,
-				faults: null,
-				grade: null,
-				gradeType: null,
-				handlerOverride: null,
-				judge: null,
-				notes: null,
-				place: null,
-				ringNumber: null,
-				runTime: null,
-				runningOrder: null,
-				showId: null,
-				specialType: null,
-				type: null,
-				winningTime: null
-			}
+			model: this.generateModel()
 		};
 	},
 	computed: {
@@ -196,15 +183,59 @@ export default {
 		gradedOrCombined() {
 			return [
 				{ label: 'Graded', value: 'graded' },
-				{ label: 'Jumping', value: 'jumping' }
-			]
+				{ label: 'Combined', value: 'combined' }
+			];
+		},
+		showId() {
+			return this.getShowId();
+		},
+		show() {
+			return this.$store.getters['shows/byId'](this.showId);
+		},
+		loading() {
+			return this.$store.getters['shows/loading'];
+		}
+	},
+	mounted() {
+		this.$store.dispatch('shows/loadShows');
+	},
+	methods: {
+		getShowId() {
+			return this.$route.params.showId;
+		},
+		submit() {
+			this.$emit('saved', this.model);
+		},
+		generateModel() {
+			return {
+				classNumber: this.run.classNumber || null,
+				classSize: this.run.classSize || null,
+				clear: this.run.clear || false,
+				courseLength: this.run.courseLength || null,
+				courseTime: this.run.courseTime || null,
+				currentGrade: this.run.currentGrade || null,
+				date: this.run.date || null,
+				dogId: this.run.dogId || null,
+				eliminated: this.run.eliminated || false,
+				faults: this.run.faults || null,
+				grade: this.run.grade || null,
+				gradeType: this.run.gradeType || null,
+				handlerOverride: this.run.handlerOverride || null,
+				judge: this.run.judge || null,
+				notes: this.run.notes || null,
+				place: this.run.place || null,
+				ringNumber: this.run.ringNumber || null,
+				runTime: this.run.runTime || null,
+				runningOrder: this.run.runningOrder || null,
+				showId: this.run.showId || this.getShowId() || null,
+				specialType: this.run.specialType || null,
+				type: this.run.type || null,
+				winningTime: this.run.winningTime || null
+			};
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-	.form {
-		padding: 20px;
-	}
 </style>

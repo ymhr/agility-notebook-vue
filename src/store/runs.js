@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { parse, format, compareAsc } from 'date-fns';
+import { post } from '@/api';
 
 const state = {
 	items: []
@@ -21,8 +22,17 @@ const mutations = {
 };
 
 const actions = {
+	loading({ commit }, mode) {
+		commit('SET_LOADING', mode);
+	},
 	upsert({ commit }, runs) {
 		runs.forEach(run => commit('UPSERT_RUN', run));
+	},
+	async create({ dispatch }, run) {
+		dispatch('loading', true);
+		const { data } = await post(`shows/${run.showId}/runs`, run);
+		dispatch('upsert', data);
+		dispatch('loading', false);
 	}
 };
 
