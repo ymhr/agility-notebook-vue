@@ -1,28 +1,27 @@
 <template>
-	<v-layout row>
-		<v-flex xs10>
-			<v-select
-				label="Handler"
-				prepend-icon="person"
-				:items="handlers"
-				item-text="name"
-				item-value="id"
-				:clearable="true"
-				@input="selected"
-			/>
-		</v-flex>
-		<v-flex xs2>
-			<v-btn outline>
-				Edit handlers
-			</v-btn>
-		</v-flex>
-	</v-layout>
+  <v-layout row>
+    <v-flex xs10>
+      <v-select
+        label="Handler"
+        prepend-icon="person"
+        :items="handlers"
+        item-text="name"
+        item-value="id"
+        :clearable="true"
+        :value="value"
+        @input="selected"
+      />
+    </v-flex>
+    <v-flex xs2>
+      <v-btn outline>Edit handlers</v-btn>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 export default {
 	props: {
-		input: {
+		value: {
 			type: [String, Number],
 			default: null
 		}
@@ -44,5 +43,4 @@ export default {
 </script>
 
 <style>
-
 </style>

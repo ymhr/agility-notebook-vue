@@ -1,26 +1,26 @@
 <template>
-	<v-select
-		label="Dog"
-		prepend-icon="pets"
-		:items="dogs"
-		item-text="label"
-		item-value="id"
-		@input="selected"
-	>
-		<template slot="item" slot-scope="{ parent, item, tile }">
-			<strong>{{item.name}}</strong>&nbsp;<em>(Grade: {{item.grade}})</em>
-		</template>
+  <v-select
+    label="Dog"
+    prepend-icon="pets"
+    :items="dogs"
+    item-text="label"
+    item-value="id"
+    :value="value"
+    @input="selected"
+  >
+    <template slot="item" slot-scope="{ parent, item, tile }">
+      <strong>{{item.name}}</strong>&nbsp;
+      <em>(Grade: {{item.grade}})</em>
+    </template>
 
-		<template slot="selection" slot-scope="{ item }">
-			{{item.name}}
-		</template>
-	</v-select>
+    <template slot="selection" slot-scope="{ item }">{{item.name}}</template>
+  </v-select>
 </template>
 
 <script>
 export default {
 	props: {
-		input: {
+		value: {
 			type: [String, Number],
 			default: null
 		}
@@ -42,5 +42,4 @@ export default {
 </script>
 
 <style>
-
 </style>
