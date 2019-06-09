@@ -1,24 +1,15 @@
 <template>
-	<v-container fill-height fluid v-if="!loading">
-		<v-layout row>
-			<v-flex xs12>
-				<YearPicker v-if="years.length" :years="years" v-model="activeYear" />
-				<ShowList :months="shows"/>
-			</v-flex>
-			<v-btn
-				:to="{ name: 'newShow' }"
-				color="orange"
-				dark
-				large
-				fixed
-				bottom
-				right
-				fab
-				>
-				<v-icon>add</v-icon>
-			</v-btn>
-		</v-layout>
-	</v-container>
+  <v-container fill-height fluid v-if="!loading">
+    <v-layout row>
+      <v-flex xs12>
+        <YearPicker v-if="years.length" :years="years" v-model="activeYear"/>
+        <ShowList :months="shows"/>
+      </v-flex>
+      <v-btn :to="{ name: 'newShow' }" color="orange" dark large fixed bottom right fab>
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -46,7 +37,9 @@ export default {
 	},
 	async mounted() {
 		await this.$store.dispatch('shows/loadShows');
-		this.activeYear = this.years[this.years.length - 1];
+		// this.activeYear = this.years[this.years.length - 1];
+		const currentDate = new Date();
+		this.activeYear = currentDate.getFullYear().toString();
 	},
 	methods: {
 		changeYear(year) {
@@ -57,19 +50,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.year {
-		display: inline-block;
-		padding: 10px;
-		background-color: #eee;
-		margin: 5px 5px 10px 5px;
-		cursor: pointer;
+  .year {
+    display: inline-block;
+    padding: 10px;
+    background-color: #eee;
+    margin: 5px 5px 10px 5px;
+    cursor: pointer;
 
-		&:first-child {
-			margin-left: 0;
-		}
+    &:first-child {
+      margin-left: 0;
+    }
 
-		&.active {
-			outline: 3px solid black;
-		}
-	}
+    &.active {
+      outline: 3px solid black;
+    }
+  }
 </style>
