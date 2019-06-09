@@ -39,7 +39,9 @@ const actions = {
 const getters = {
 	all: state => state.items,
 	byId: (state, getters) => id => getters.all.find(run => run.id === id),
-	byShow: (state, getters) => id => getters.all.filter(run => parseInt(run.showId, 10) === parseInt(id, 10)),
+	byShow: (state, getters) => id => getters.all.filter(
+		run => parseInt(run.showId, 10) === parseInt(id, 10)
+	),
 	byShowByDate: (state, getters) => (id) => {
 		const runs = getters.byShow(id);
 		const days = runs.reduce((runs, run) => {
@@ -52,12 +54,12 @@ const getters = {
 			return runs;
 		}, {});
 
-		const orderedDays = Object.keys(days).sort((a, b) => {
-			a = parse(a);
-			b = parse(b);
-			return compareAsc(a, b);
-		})
-			.reverse() // sorting asc/desc no difference, reverse???
+		const orderedDays = Object.keys(days)
+			.sort((a, b) => {
+				a = parse(a);
+				b = parse(b);
+				return compareAsc(a, b);
+			})
 			.reduce((allDays, day) => {
 				allDays[day] = days[day];
 				return allDays;
