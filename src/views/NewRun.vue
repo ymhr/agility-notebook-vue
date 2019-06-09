@@ -1,12 +1,12 @@
 <template>
-	<v-container fluid fill-height>
-		<v-layout row>
-			<v-flex xs12>
-				<h1>New</h1>
-				<Form @saved="save"/>
-			</v-flex>
-		</v-layout>
-	</v-container>
+  <v-container fluid fill-height>
+    <v-layout row>
+      <v-flex xs12>
+        <h1>{{title}}</h1>
+        <Form @saved="save" :run="run"/>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -20,15 +20,18 @@ export default {
 		},
 		run() {
 			return this.$store.getters['runs/byId'](this.runId);
+		},
+		title() {
+			return this.run ? 'Edit' : 'New';
 		}
 	},
 	methods: {
 		save(data) {
-			if(!this.run) {
+			if (!this.run) {
 				console.log('create', data);
 				this.$store.dispatch('runs/create', data);
 			} else {
-				console.log('update');
+				console.log('update', data);
 			}
 		}
 	}
@@ -36,5 +39,4 @@ export default {
 </script>
 
 <style>
-
 </style>
