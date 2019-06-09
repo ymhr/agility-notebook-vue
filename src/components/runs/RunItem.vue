@@ -1,23 +1,26 @@
 <template>
-	<div v-if="!loading" class="run">
-		<v-btn
-			class="edit"
-			small
-			fab
-			absolute
-			top
-			right
-		>
-			<v-icon>edit</v-icon>
-		</v-btn>
-
-		<h2>{{title}}</h2>
-		<h3>{{date}}</h3>
-
-		<div>{{dog.name}}</div>
-		<div>{{handler.name}}</div>
-	</div>
-	<div v-else>Loading...</div>
+  <v-flex ref="card" md4 v-if="!loading">
+    <v-card class="run" hover @click="expand">
+      <v-card-title primary-title v-if="title">
+        <div>
+          <h2 class="title">{{title}}</h2>
+          <h3 class="subheading">{{date}}</h3>
+        </div>
+      </v-card-title>
+      <v-card-text>
+        <div>
+          <div>{{dog.name}}</div>
+          <div>{{handler.name}}</div>
+        </div>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="secondary" small flat block :to="{name: 'editRun', params: { runId: id }}">
+          <v-icon small>edit</v-icon>Edit
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-flex>
+  <div v-else>Loading...</div>
 </template>
 
 <script>
@@ -32,7 +35,15 @@ export default {
 			required: true
 		}
 	},
+	data() {
+		return {
+			expanded: false
+		};
+	},
 	computed: {
+		id() {
+			return this.run.id;
+		},
 		title() {
 			return [
 				this.run.classNumber ? `Class #${this.run.classNumber}` : null,
@@ -47,39 +58,25 @@ export default {
 			return format(parse(this.run.date), 'Do MMMM YYYY');
 		},
 		dog() {
-			return this.$store.getters['dogs/byId'](this.run.dogId);
+			const dog = this.$store.getters['dogs/byId'](this.run.dogId);
+			if (!dog) return 'Unknown';
+			return dog.name;
 		},
 		handler() {
 			if (this.run.handlerOverride) return this.$store.getters['handlers/byId'](this.run.handlerOverride);
-			return this.$store.getters['handlers/byId'](this.dog.handlerId);
+			return this.$store.getters['handlers/byId'](this.dog.handlerId) || {};
 		},
 		loading() {
 			return this.$store.getters['dogs/loading'] || this.$store.getters['handlers/loading'];
+		}
+	},
+	methods: {
+		expand() {
+			this.expanded = !this.expanded;
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-	.run {
-		padding: 20px;
-		background-color: #eee;
-		margin-bottom: 20px;
-		position: relative;
-		transition: all 0.3s ease;
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
-
-		.edit {
-			display: none;
-		}
-
-		&:hover {
-			box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.3);
-
-			.edit {
-				display: block;
-				float: right;
-			}
-		}
-	}
 </style>
