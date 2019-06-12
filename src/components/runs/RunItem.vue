@@ -1,5 +1,5 @@
 <template>
-  <v-flex ref="card" md4 v-if="!loading">
+  <v-flex ref="card" md3 v-if="!loading">
     <v-card class="run" hover @click="expand">
       <v-card-title primary-title v-if="title">
         <div>

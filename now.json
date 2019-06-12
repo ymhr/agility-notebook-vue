@@ -1,0 +1,15 @@
+{
+	"version": 2,
+	"name": "notebook-beta",
+	"builds": [{ "src": "package.json", "use": "@now/static-build" }],
+	"routes": [
+		{ "src": "^/js/(.*)", "dest": "/js/$1" },
+		{ "src": "^/css/(.*)", "dest": "/css/$1" },
+		{ "src": "^/img/(.*)", "dest": "/img/$1" },
+		{ "src": ".*", "dest": "/index.html" }
+	],
+	"env": {
+		"VUE_APP_API_ADDRESS": "https://api.agilitynotebook.com",
+		"VUE_APP_LOCAL_ADDRESS": "https://notebook-beta.ymhr.now.sh"
+	}
+}
