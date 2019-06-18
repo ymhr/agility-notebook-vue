@@ -1,8 +1,9 @@
 workflow "Deploy to now" {
   on = "push"
-  resolves = ["new-action"]
+  resolves = ["GitHub Action for Zeit"]
 }
 
-action "new-action" {
-  uses = "owner/repo/path@ref"
+action "GitHub Action for Zeit" {
+  uses = "actions/zeit-now@5c51b26db987d15a0133e4c760924896b4f1512f"
+  secrets = ["ZEIT_TOKEN"]
 }
