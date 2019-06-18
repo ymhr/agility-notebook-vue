@@ -17,7 +17,7 @@
       <Details :showId="this.id"/>
     </header>
     <v-flex>
-      <v-container grid-list-sm fluid>
+      <v-container grid-list-lg fluid>
         <v-layout row wrap>
           <v-flex xs12>
             <ExpandPanel v-for="(dogs, day) in runDays" :key="day">
@@ -86,22 +86,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .controls {
-    position: absolute;
-    bottom: calc(0% - 20px);
-    right: 0;
-  }
-  header {
-    background-color: #eee;
-    position: relative;
-    padding: 20px;
-  }
+	.controls {
+		position: absolute;
+		bottom: calc(0% - 20px);
+		right: 0;
+	}
+	header {
+		background-color: #eee;
+		position: relative;
+		padding: 20px;
+	}
 
-  .show /deep/ .sep {
-    cursor: pointer;
+	.show /deep/ .sep {
+		cursor: pointer;
 
-    &:hover {
-      background-color: #eee;
-    }
-  }
+		&:hover {
+			background-color: #eee;
+		}
+	}
 </style>
