@@ -13,7 +13,7 @@
       />
     </v-flex>
     <v-flex xs1>
-      <v-btn small outline fab>
+      <v-btn small outline fab color="grey">
         <v-icon>edit</v-icon>
       </v-btn>
     </v-flex>
