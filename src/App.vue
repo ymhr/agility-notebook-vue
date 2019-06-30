@@ -24,7 +24,7 @@
       </v-toolbar>
 
       <v-content>
-        <router-view/>
+        <router-view class="router-view" />
       </v-content>
     </div>
   </v-app>

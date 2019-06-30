@@ -14,19 +14,29 @@
         </v-btn>
       </v-speed-dial>
       <h1>{{show.name}}</h1>
-      <Details :showId="this.id"/>
+      <Details :showId="this.id" />
     </header>
     <v-flex>
       <v-container grid-list-lg fluid>
         <v-layout row wrap>
           <v-flex xs12>
             <ExpandPanel v-for="(dogs, day) in runDays" :key="day">
-              <Separator slot="activator">{{day}}</Separator>
+              <template #activator="{open, icon}">
+                <Separator>
+                  {{day}}
+                  <v-icon>{{icon}}</v-icon>
+                </Separator>
+              </template>
               <ExpandPanel v-for="(runs, dogId) in dogs" :key="dogId">
-                <Separator slot="activator">{{dogName(dogId)}}</Separator>
+                <template #activator="{open, icon}">
+                  <Separator>
+                    {{dogName(dogId)}}
+                    <v-icon>{{icon}}</v-icon>
+                  </Separator>
+                </template>
                 <!-- <v-flex xs12 sm6 md4 v-for="run in runs" :key="run.id"> -->
                 <v-layout row wrap>
-                  <Run :run="run" v-for="run in runs" :key="run.id"/>
+                  <Run :run="run" v-for="run in runs" :key="run.id" />
                 </v-layout>
                 <!-- </v-flex> -->
               </ExpandPanel>
@@ -86,22 +96,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.controls {
-		position: absolute;
-		bottom: calc(0% - 20px);
-		right: 0;
-	}
-	header {
-		background-color: #eee;
-		position: relative;
-		padding: 20px;
-	}
+  .controls {
+    position: absolute;
+    bottom: calc(0% - 20px);
+    right: 0;
+  }
+  header {
+    background-color: #eee;
+    position: relative;
+    padding: 20px;
+  }
 
-	.show /deep/ .sep {
-		cursor: pointer;
+  .show /deep/ .sep {
+    cursor: pointer;
 
-		&:hover {
-			background-color: #eee;
-		}
-	}
+    &:hover {
+      background-color: #eee;
+    }
+  }
 </style>

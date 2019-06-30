@@ -1,6 +1,6 @@
 <template>
   <v-flex ref="card" md3 v-if="!loading">
-    <v-card class="run" hover @click="expand">
+    <v-card class="run" hover @click="expand" flat color="grey lighten-2">
       <v-card-title primary-title v-if="title">
         <div>
           <h2 class="title">{{title}}</h2>
