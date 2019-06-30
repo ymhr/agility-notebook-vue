@@ -34,11 +34,9 @@
                     <v-icon>{{icon}}</v-icon>
                   </Separator>
                 </template>
-                <!-- <v-flex xs12 sm6 md4 v-for="run in runs" :key="run.id"> -->
                 <v-layout row wrap>
                   <Run :run="run" v-for="run in runs" :key="run.id" />
                 </v-layout>
-                <!-- </v-flex> -->
               </ExpandPanel>
             </ExpandPanel>
           </v-flex>
