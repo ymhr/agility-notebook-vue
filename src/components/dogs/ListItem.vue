@@ -9,14 +9,14 @@
 import ItemDetails from '@/components/ItemDetails.vue';
 
 export default {
-    components: { ItemDetails },
-    props: {
-        dog: {
-            type: Object,
-            required: true
-        }
-    }
-}
+	components: { ItemDetails },
+	props: {
+		dog: {
+			type: Object,
+			required: true
+		}
+	}
+};
 </script>
 
 <style lang="scss" scoped>

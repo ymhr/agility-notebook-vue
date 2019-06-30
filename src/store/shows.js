@@ -1,5 +1,7 @@
 import Vue from 'vue';
-import { parse, format, compareAsc, isAfter } from 'date-fns';
+import {
+	parse, format, compareAsc, isAfter
+} from 'date-fns';
 import { get, post } from '@/api';
 
 const state = {
