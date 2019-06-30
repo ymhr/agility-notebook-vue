@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs10>
+    <v-flex xs11>
       <v-select
         label="Handler"
         prepend-icon="person"
@@ -12,8 +12,10 @@
         @input="selected"
       />
     </v-flex>
-    <v-flex xs2>
-      <v-btn outline>Edit handlers</v-btn>
+    <v-flex xs1>
+      <v-btn small outline fab>
+        <v-icon>edit</v-icon>
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>

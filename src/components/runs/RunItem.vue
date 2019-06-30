@@ -9,7 +9,7 @@
       </v-card-title>
       <v-card-text>
         <div>
-          <div>{{handler.name}} ran {{dog}}</div>
+          <div>{{handler.name}} ran {{dog.name}}</div>
           <div></div>
         </div>
         <ExpandPanel ref="details" :initialState="false">
@@ -125,8 +125,8 @@ export default {
 		},
 		dog() {
 			const dog = this.$store.getters['dogs/byId'](this.run.dogId);
-			if (!dog) return 'Unknown';
-			return dog.name;
+			if (!dog) return { name: 'Unknown' };
+			return dog;
 		},
 		handler() {
 			if (this.run.handlerOverride) return this.$store.getters['handlers/byId'](this.run.handlerOverride);
