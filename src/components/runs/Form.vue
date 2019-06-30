@@ -5,16 +5,16 @@
       <v-layout row>
         <v-flex xs12>
           <Separator>Booked run</Separator>
-          <DogSelector v-model="model.dogId"/>
-          <HandlerSelector v-model="model.handlerOverride"/>
+          <DogSelector v-model="model.dogId" />
+          <HandlerSelector v-model="model.handlerOverride" />
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs12 md4>
-          <v-text-field type="number" label="Class number" v-model="model.classNumber"/>
+          <v-text-field type="number" label="Class number" v-model="model.classNumber" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field label="Judge" v-model="model.judge"/>
+          <v-text-field label="Judge" v-model="model.judge" />
         </v-flex>
         <v-flex xs12 md4>
           <v-menu
@@ -71,45 +71,45 @@
       </v-layout>
       <v-layout row wrap>
         <v-flex xs12 md6>
-          <v-text-field label="Grade" v-model="model.grade"/>
+          <v-text-field label="Grade" v-model="model.grade" />
         </v-flex>
         <v-flex xs12 md6>
-          <v-text-field label="Grade at the time" v-model="model.currentGrade"/>
+          <v-text-field label="Grade at the time" v-model="model.currentGrade" />
         </v-flex>
       </v-layout>
 
       <Separator>Running order for run</Separator>
       <v-layout row wrap>
         <v-flex xs12 md4>
-          <v-text-field label="Ring number" v-model="model.ringNumber"/>
+          <v-text-field label="Ring number" v-model="model.ringNumber" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field label="Running order" v-model="model.runningOrder"/>
+          <v-text-field label="Running order" v-model="model.runningOrder" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field type="number" label="Class size" v-model="model.classSize"/>
+          <v-text-field type="number" label="Class size" v-model="model.classSize" />
         </v-flex>
       </v-layout>
 
       <Separator>After run</Separator>
       <v-layout row wrap>
         <v-flex xs12 md4>
-          <v-text-field label="Course length" v-model="model.courseLength"/>
+          <v-text-field label="Course length" v-model="model.courseLength" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field label="Course time" v-model="model.courseTime"/>
+          <v-text-field label="Course time" v-model="model.courseTime" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field label="Winning time" v-model="model.winningTime"/>
+          <v-text-field label="Winning time" v-model="model.winningTime" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field type="number" label="Your place" v-model="model.place"/>
+          <v-text-field type="number" label="Your place" v-model="model.place" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field label="Faults" v-model="model.faults"/>
+          <v-text-field label="Faults" v-model="model.faults" />
         </v-flex>
         <v-flex xs12 md4>
-          <v-text-field label="Your time" v-model="model.runTime"/>
+          <v-text-field label="Your time" v-model="model.runTime" />
         </v-flex>
       </v-layout>
       <v-btn block color="success" @click="submit">Save</v-btn>
@@ -130,12 +130,15 @@ export default {
 			default: () => ({})
 		}
 	},
-	data() {
-		return {
-			model: this.generateModel()
-		};
-	},
+	// data() {
+	// 	return {
+	// 		model: this.generateModel()
+	// 	};
+	// },
 	computed: {
+		model() {
+			return this.generateModel();
+		},
 		classTypes() {
 			return [
 				{ label: 'Agility', value: 'agility' },

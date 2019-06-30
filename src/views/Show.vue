@@ -34,7 +34,7 @@
                     <v-icon>{{icon}}</v-icon>
                   </Separator>
                 </template>
-                <v-layout row wrap>
+                <v-layout row wrap class="runs-row">
                   <Run :run="run" v-for="run in runs" :key="run.id" />
                 </v-layout>
               </ExpandPanel>
@@ -111,5 +111,9 @@ export default {
     &:hover {
       background-color: #eee;
     }
+  }
+
+  .runs-row {
+    margin-bottom: 20px !important;
   }
 </style>

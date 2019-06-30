@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { parse, format, compareAsc } from 'date-fns';
-import { post } from '@/api';
+import { post, get } from '@/api';
 
 const state = {
 	items: []
@@ -26,6 +26,9 @@ const actions = {
 		commit('SET_LOADING', mode);
 	},
 	upsert({ commit }, runs) {
+		if (!Array.isArray(runs)) {
+			runs = [runs];
+		}
 		runs.forEach(run => commit('UPSERT_RUN', run));
 	},
 	async create({ dispatch }, run) {
@@ -33,12 +36,33 @@ const actions = {
 		const { data } = await post(`shows/${run.showId}/runs`, run);
 		dispatch('upsert', data);
 		dispatch('loading', false);
+	},
+	async update({ dispatch }, { runId, data }) {
+		dispatch('loading', true);
+		try {
+			await post(`shows/${data.showId}/runs/${runId}`, data);
+		} catch (e) {
+			console.error('Error saving run', e);
+		}
+		dispatch('upsert', data);
+		dispatch('loading', false);
+	},
+	async load({ dispatch, getters, state }, { showId, runId }) {
+		if (!getters.byId(runId) && !state.loading) {
+			dispatch('loading', true);
+			try {
+				const { data } = await get(`shows/${showId}/runs/${runId}`);
+				dispatch('upsert', data);
+			} catch (e) {
+				console.error('Error fetching run', e);
+			}
+		}
 	}
 };
 
 const getters = {
 	all: state => state.items,
-	byId: (state, getters) => id => getters.all.find(run => run.id === id),
+	byId: (state, getters) => id => getters.all.find(run => parseInt(run.id, 10) === parseInt(id, 10)),
 	byShow: (state, getters) => id => getters.all.filter(
 		run => parseInt(run.showId, 10) === parseInt(id, 10)
 	),

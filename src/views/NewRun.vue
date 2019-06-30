@@ -3,7 +3,7 @@
     <v-layout row>
       <v-flex xs12>
         <h1>{{title}}</h1>
-        <Form @saved="save" :run="run"/>
+        <Form @saved="save" :run="run" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -18,12 +18,18 @@ export default {
 		runId() {
 			return this.$route.params.runId;
 		},
+		showId() {
+			return this.$route.params.showId;
+		},
 		run() {
 			return this.$store.getters['runs/byId'](this.runId);
 		},
 		title() {
 			return this.run ? 'Edit' : 'New';
 		}
+	},
+	async mounted() {
+		await this.$store.dispatch('runs/load', { runId: this.runId, showId: this.showId });
 	},
 	methods: {
 		save(data) {
@@ -32,6 +38,7 @@ export default {
 				this.$store.dispatch('runs/create', data);
 			} else {
 				console.log('update', data);
+				this.$store.dispatch('runs/update', { runId: this.runId, data });
 			}
 		}
 	}
