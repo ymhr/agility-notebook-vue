@@ -72,7 +72,11 @@ const actions = {
 		}
 	},
 	async create({ dispatch }, dog) {
-		if (dog.id) throw new Error('This should be a new dog, no ID should be present');
+		if (dog.id) {
+			throw new Error(
+				'This should be a new dog, no ID should be present'
+			);
+		}
 
 		try {
 			dispatch('setLoading', true);

@@ -30,12 +30,13 @@ export default {
 	},
 	methods: {
 		async handleSubmission(dog) {
-			console.log('new dog', dog);
 			if (this.dog) {
 				this.$store.dispatch('dogs/update', dog);
 			} else {
 				const newDog = await this.$store.dispatch('dogs/create', dog);
-				this.$router.push({ name: 'dog', params: { showId: newDog.id } });
+				if (newDog) {
+					this.$router.push({ name: 'editDog', params: { showId: newDog.id } });
+				}
 			}
 		}
 	}

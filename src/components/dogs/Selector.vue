@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs11>
+    <v-flex xs12>
       <v-select
         label="Dog"
         prepend-icon="pets"
@@ -18,11 +18,11 @@
         <template slot="selection" slot-scope="{ item }">{{item.name}}</template>
       </v-select>
     </v-flex>
-    <v-flex xs1>
+    <!-- <v-flex xs1>
       <v-btn small color="grey" outline fab>
         <v-icon>edit</v-icon>
       </v-btn>
-    </v-flex>
+    </v-flex>-->
   </v-layout>
 </template>
 
