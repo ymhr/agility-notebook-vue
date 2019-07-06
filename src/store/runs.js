@@ -69,7 +69,7 @@ const getters = {
 	byShowByDate: (state, getters) => (id) => {
 		const runs = getters.byShow(id);
 		const days = runs.reduce((runs, run) => {
-			const date = format(parse(run.date), 'Do MMMM');
+			const date = format(parse(run.date), 'dddd Do MMMM');
 
 			if (!runs[date]) runs[date] = [];
 

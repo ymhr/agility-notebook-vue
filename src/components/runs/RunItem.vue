@@ -4,7 +4,6 @@
       <v-card-title primary-title v-if="title">
         <div>
           <h2 class="title">{{title}}</h2>
-          <h3 class="subheading">{{date}}</h3>
         </div>
       </v-card-title>
       <v-card-text>
