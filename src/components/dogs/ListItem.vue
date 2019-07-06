@@ -1,6 +1,14 @@
 <template>
   <div class="dog">
-    <v-btn class="edit-button" color="secondary" fab absolute right small>
+    <v-btn
+      class="edit-button"
+      color="secondary"
+      fab
+      absolute
+      right
+      small
+      :to="{name: 'editDog', params: {id: dog.id}}"
+    >
       <v-icon>edit</v-icon>
     </v-btn>
     <h2>{{dog.name}}</h2>

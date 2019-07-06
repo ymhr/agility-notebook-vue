@@ -2,22 +2,41 @@
   <v-container fluid fill-height>
     <v-layout row>
       <v-flex xs12>
-        <h1>New</h1>
-        <Form @saved="createNewShow" />
+        <h1>{{title}}</h1>
+        <Form :dog="dog" @saved="handleSubmission" />
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import Form from '@/components/show/Form.vue';
+import Form from '@/components/dogs/Form.vue';
 
 export default {
 	components: { Form },
+	computed: {
+		dogId() {
+			return this.$route.params.id;
+		},
+		dog() {
+			return this.$store.getters['dogs/byId'](this.dogId);
+		},
+		title() {
+			return this.dog ? 'Edit' : 'New';
+		}
+	},
+	async mounted() {
+		await this.$store.dispatch('dogs/loadDogs');
+	},
 	methods: {
-		async createNewShow(show) {
-			const newShow = await this.$store.dispatch('shows/create', show);
-			this.$router.push({ name: 'show', params: { showId: newShow.id } });
+		async handleSubmission(dog) {
+			console.log('new dog', dog);
+			if (this.dog) {
+				this.$store.dispatch('dogs/update', dog);
+			} else {
+				const newDog = await this.$store.dispatch('dogs/create', dog);
+				this.$router.push({ name: 'dog', params: { showId: newDog.id } });
+			}
 		}
 	}
 };
