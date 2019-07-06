@@ -99,6 +99,11 @@ const getters = {
 
 				dogs[run.dogId].push(run);
 
+				dogs[run.dogId].sort(
+					(a, b) => parseInt(a.classNumber, 10)
+						- parseInt(b.classNumber, 10)
+				);
+
 				return dogs;
 			}, {});
 
